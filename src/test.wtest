@@ -1,0 +1,64 @@
+import impuestos.*
+import tareas.*
+import proyectos.*
+
+describe "test del manejo de proyectos" {
+	
+	const escribirTests = new TareaSimple(4)
+	const programarTP0 = new TareaCompuesta(10)
+	const armarFixture = new TareaSimple(2)
+	const programarObjetoPepita = new TareaSimple(1)
+	const programarObjetoPepona = new TareaSimple(2)
+	
+	fixture {
+		programarTP0
+			.agregarSubtarea(armarFixture)
+			.agregarSubtarea(escribirTests)
+			.agregarSubtarea(programarObjetoPepita)
+			.agregarSubtarea(programarObjetoPepona)
+			
+		armarFixture.agregarImpuesto(impuestoA).agregarImpuesto(impuestoB)
+		
+		programarObjetoPepita.asignarComplejidadMedia()
+		programarObjetoPepona.asignarComplejidadMaxima()
+	}
+	
+	test "costo de una tarea simple sin impuestos de complejidad minima" {
+		assert.equals(100, escribirTests.costo())
+	}
+	
+	test "costo de una tarea simple con impuestos A y B de complejidad minima" {
+		assert.equals(54, armarFixture.costo())
+	}
+
+	test "costo de una tarea simple sin impuestos de complejidad media" {
+		assert.equals(26.25, programarObjetoPepita.costo())
+	}
+
+	test "costo de una tarea simple de 2 días sin impuestos de complejidad máxima" {
+		assert.equals(53.5, programarObjetoPepona.costo())
+	}
+
+	test "setear % de completitud de una tarea simple" {
+		programarObjetoPepona.cumplir()
+	}
+
+	test "setear % de completitud de una tarea compuesta" {
+		assert.throwsExceptionWithMessage("Solo puede marcar como cumplida una tarea simple", {
+			programarTP0.cumplir()
+		}) 
+	}
+
+	test "días de atraso de una tarea de complejidad minima" {
+		assert.equals(5, armarFixture.diasAtraso())
+	}
+
+	test "días de atraso de una tarea de complejidad media" {
+		assert.equals(1.1, programarObjetoPepita.diasAtraso())
+	}
+
+	test "días de atraso de una tarea de complejidad máxima" {
+		assert.equals(10.4, programarObjetoPepona.diasAtraso())
+	}
+	
+}
