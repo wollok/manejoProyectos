@@ -2,22 +2,25 @@ import impuestos.*
 import tareas.*
 import proyectos.*
 
+
 describe "test del manejo de proyectos" {
 	
-	const escribirTests = new TareaSimple(4)
-	const programarTP0 = new TareaCompuesta(10)
-	const armarFixture = new TareaSimple(2)
-	const programarObjetoPepita = new TareaSimple(1)
-	const programarObjetoPepona = new TareaSimple(2)
-	
+	const escribirTests = new TareaSimple(tiempo = 4)
+	const programarTP0 = new TareaCompuesta(tiempo = 10)
+	const armarFixture = new TareaSimple(tiempo = 2)
+	const programarObjetoPepita = new TareaSimple(tiempo = 1)
+	const programarObjetoPepona = new TareaSimple(tiempo = 2)
+	const impuestoA = new Impuesto (porcentaje = 3)
+	const impuestoB = new Impuesto (porcentaje = 5) 
+
 	fixture {
-		programarTP0
-			.agregarSubtarea(armarFixture)
-			.agregarSubtarea(escribirTests)
-			.agregarSubtarea(programarObjetoPepita)
-			.agregarSubtarea(programarObjetoPepona)
+		programarTP0.agregarSubtarea(armarFixture)
+		programarTP0.agregarSubtarea(escribirTests)
+		programarTP0.agregarSubtarea(programarObjetoPepita)
+		programarTP0.agregarSubtarea(programarObjetoPepona)
 			
-		armarFixture.agregarImpuesto(impuestoA).agregarImpuesto(impuestoB)
+		armarFixture.agregarImpuesto(impuestoA)
+		armarFixture.agregarImpuesto(impuestoB)
 		
 		programarObjetoPepita.asignarComplejidadMedia()
 		programarObjetoPepona.asignarComplejidadMaxima()

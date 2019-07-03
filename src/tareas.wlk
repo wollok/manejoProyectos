@@ -35,28 +35,20 @@ class Tarea {
 	var tiempo
 	const impuestos = []
 
-	constructor(_tiempo) {
-		tiempo = _tiempo
-	}
-
 	method agregarImpuesto(impuesto) {
 		impuestos.add(impuesto)
-		return self
 	}
 	
 	method asignarComplejidadMinima() {
 		complejidad = new ComplejidadMinima()
-		return self
 	}
 	
 	method asignarComplejidadMedia() {
 		complejidad = new ComplejidadMedia()
-		return self
 	}
 	
 	method asignarComplejidadMaxima() {
 		complejidad = new ComplejidadMaxima()
-		return self
 	}
 
 	method cumplir()
@@ -102,7 +94,6 @@ class TareaCompuesta inherits Tarea {
 	
 	method agregarSubtarea(subtarea) {
 		subtareas.add(subtarea)
-		return self
 	}
 	
 	override method costoPorOverhead() = 
