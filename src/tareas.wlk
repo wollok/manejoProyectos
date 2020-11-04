@@ -33,7 +33,7 @@ class ComplejidadMaxima inherits Complejidad {
 class Tarea {
 	var complejidad = new ComplejidadMinima()
 	var tiempo
-	const impuestos = []
+	const impuestos = #{}
 
 	method agregarImpuesto(impuesto) {
 		impuestos.add(impuesto)
@@ -89,7 +89,7 @@ class TareaCompuesta inherits Tarea {
 	const subtareas = []
 	
 	override method cumplir() {
-		error.throwWithMessage("Solo puede marcar como cumplida una tarea simple")
+		self.error("Solo puede marcar como cumplida una tarea simple")
 	}
 	
 	method agregarSubtarea(subtarea) {
