@@ -2,34 +2,34 @@ import impuestos.*
 import tareas.*
 import proyectos.*
 
-
 describe "test del manejo de proyectos" {
-	
+
 	const escribirTests = new TareaSimple(tiempo = 4)
 	const programarTP0 = new TareaCompuesta(tiempo = 10)
 	const armarFixture = new TareaSimple(tiempo = 2)
 	const programarObjetoPepita = new TareaSimple(tiempo = 1)
 	const programarObjetoPepona = new TareaSimple(tiempo = 2)
-	const impuestoA = new Impuesto (porcentaje = 3)
-	const impuestoB = new Impuesto (porcentaje = 5) 
+	const impuestoA = new Impuesto(porcentaje = 3)
+	const impuestoB = new Impuesto(porcentaje = 5)
+	const darClase = new Proyecto()
 
 	fixture {
 		programarTP0.agregarSubtarea(armarFixture)
 		programarTP0.agregarSubtarea(escribirTests)
 		programarTP0.agregarSubtarea(programarObjetoPepita)
 		programarTP0.agregarSubtarea(programarObjetoPepona)
-			
 		armarFixture.agregarImpuesto(impuestoA)
 		armarFixture.agregarImpuesto(impuestoB)
-		
-		programarObjetoPepita.asignarComplejidadMedia()
-		programarObjetoPepona.asignarComplejidadMaxima()
+		programarObjetoPepita.complejidad(complejidadMedia)
+		programarObjetoPepona.complejidad(complejidadMaxima)
+		darClase.agregarTarea(escribirTests)
+		darClase.agregarTarea(programarObjetoPepita)
 	}
-	
+
 	test "costo de una tarea simple sin impuestos de complejidad minima" {
 		assert.equals(100, escribirTests.costo())
 	}
-	
+
 	test "costo de una tarea simple con impuestos A y B de complejidad minima" {
 		assert.equals(54, armarFixture.costo())
 	}
@@ -44,12 +44,11 @@ describe "test del manejo de proyectos" {
 
 	test "setear % de completitud de una tarea simple" {
 		programarObjetoPepona.cumplir()
+		assert.equals(100,programarObjetoPepona.porcentajeCumplimiento())
 	}
 
 	test "setear % de completitud de una tarea compuesta" {
-		assert.throwsExceptionWithMessage("Solo puede marcar como cumplida una tarea simple", {
-			programarTP0.cumplir()
-		}) 
+		assert.throwsExceptionWithMessage("Solo puede marcar como cumplida una tarea simple", { programarTP0.cumplir()})
 	}
 
 	test "días de atraso de una tarea de complejidad minima" {
@@ -63,5 +62,14 @@ describe "test del manejo de proyectos" {
 	test "días de atraso de una tarea de complejidad máxima" {
 		assert.equals(10.4, programarObjetoPepona.diasAtraso())
 	}
-	
+
+	test "maximo dias de atraso de un proyecto" {
+		assert.equals(5, darClase.diasMaximosDeAtraso())
+	}
+
+	test "costo de un proyecto es al suma de los costos que lo componen" {
+		assert.equals(126.25, darClase.costoTotal())
+	}
+
 }
+
