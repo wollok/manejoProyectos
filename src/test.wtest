@@ -9,8 +9,6 @@ describe "test del manejo de proyectos" {
 	const armarFixture = new TareaSimple(tiempo = 2)
 	const programarObjetoPepita = new TareaSimple(tiempo = 1)
 	const programarObjetoPepona = new TareaSimple(tiempo = 2)
-	const impuestoA = new Impuesto(porcentaje = 3)
-	const impuestoB = new Impuesto(porcentaje = 5)
 	const darClase = new Proyecto()
 
 	fixture {

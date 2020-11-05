@@ -59,7 +59,7 @@ class Tarea {
 
 	method costoImpositivo() {
 		const costoBase = self.costoComplejidad()
-		return impuestos.sum{ impuesto => impuesto.costo(costoBase) }
+		return impuestos.sum{ impuesto => impuesto.calcularValor(costoBase) }
 	}
 
 }
