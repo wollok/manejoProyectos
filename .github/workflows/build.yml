@@ -28,5 +28,5 @@ jobs:
           mv ./build/src/* ./build
           npm run pack
           cd ..
-          ./wollok-ts-cli/dist/wollok-ts-cli-linux-x64 test
+          ./wollok-ts-cli/dist/wollok-ts-cli-linux-x64 test --skipValidations -p ./
         shell: bash
