@@ -11,13 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
+      - uses: actions/checkout@v4
+      - run: |
+          git clone https://github.com/uqbar-project/wollok-ts-cli
+          cp wollok-ts-cli/.nvmrc .
+      - name: Use Node.js
+        uses: actions/setup-node@v3
         with:
-          java-version: 11
+          node-version-file: '.nvmrc'
 
       # Execute Gradle commands in GitHub Actions workflows
       - run: |
-          git clone https://github.com/uqbar-project/wollok-cli
-          wollok-cli/wollok test
+          cd wollok-ts-cli
+          npm install
+          npm run build
+          cd ..
+          ./wollok-ts-cli/dist/wollok-ts-cli test
         shell: bash
