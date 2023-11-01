@@ -7,7 +7,7 @@ name: build
 # events but only for the master branch
 on: [push, pull_request]
 jobs:
-  gradle:
+  wollok-ts:
     runs-on: ubuntu-latest
 
     steps:
