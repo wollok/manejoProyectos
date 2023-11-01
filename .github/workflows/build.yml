@@ -25,7 +25,7 @@ jobs:
           cd wollok-ts-cli
           npm install
           npm run build
-          mv -r ./build/src ./build
+          mv ./build/src/* ./build
           npm run pack
           cd ..
           ./wollok-ts-cli/dist/wollok-ts-cli-linux-x64 test
