@@ -11,7 +11,7 @@ describe "test del manejo de proyectos" {
 	const programarObjetoPepona = new TareaSimple(tiempo = 2)
 	const darClase = new Proyecto()
 
-	method initialize() {
+	override method initialize() {
 		programarTP0.agregarSubtarea(armarFixture)
 		programarTP0.agregarSubtarea(escribirTests)
 		programarTP0.agregarSubtarea(programarObjetoPepita)
