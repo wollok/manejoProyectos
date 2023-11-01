@@ -22,13 +22,11 @@ jobs:
 
       # Execute Gradle commands in GitHub Actions workflows
       - run: |
-          ls
           cd wollok-ts-cli
           npm install
           npm run build
-          ls
+          ls ./build
           npm run pack
-          ls ./dist
           cd ..
           ./wollok-ts-cli/dist/wollok-ts-cli-linux-x64 test
         shell: bash
