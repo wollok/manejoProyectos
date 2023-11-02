@@ -12,21 +12,9 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          git clone https://github.com/uqbar-project/wollok-ts-cli
-          cp wollok-ts-cli/.nvmrc .
-      - name: Use Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: '.nvmrc'
 
       # Execute Gradle commands in GitHub Actions workflows
       - run: |
-          cd wollok-ts-cli
-          npm install
-          npm run build
-          mv ./build/src/* ./build
-          npm run pack
-          cd ..
-          ./wollok-ts-cli/dist/wollok-ts-cli-linux-x64 test --skipValidations -p ./
+          wget -O wollok-ts-cli https://github.com/uqbar-project/wollok-ts-cli/releases/download/v0.1.0/wollok-ts-cli-linux-x64
+          ./wollok-ts-cli test --skipValidations -p ./
         shell: bash
