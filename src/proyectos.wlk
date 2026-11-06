@@ -1,6 +1,6 @@
 class Proyecto {
 
-	const tareas = [ ]
+	const tareas = []
 
 	method agregarTarea(tarea) {
 		tareas.add(tarea)

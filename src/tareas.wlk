@@ -1,19 +1,19 @@
 class Complejidad {
 
-	method costoBase(tarea) = tarea.tiempo() * 25
+	method costoBase(tiempo) = tiempo * 25
 
 	method costo(tarea) {
-		const costoBase = self.costoBase(tarea)
-		return costoBase + self.costoExtra(tarea.tiempo(), costoBase)
+		const costoBase = self.costoBase(tarea.tiempo())
+		return costoBase + self.costoExtra(tarea.tiempo())
 	}
 
-	method costoExtra(tiempo, costoBase)
+	method costoExtra(tiempo)
 
 }
 
 object complejidadMinima inherits Complejidad {
 
-	override method costoExtra(tiempo, costoBase) = 0
+	override method costoExtra(tiempo) = 0
 
 	method diasAtraso(tarea) = 5
 
@@ -21,7 +21,7 @@ object complejidadMinima inherits Complejidad {
 
 object complejidadMedia inherits Complejidad {
 
-	override method costoExtra(tiempo, costoBase) = 0.05 * costoBase
+	override method costoExtra(tiempo) = 0.05 * self.costoBase(tiempo)
 
 	method diasAtraso(tarea) = 1.1 * tarea.tiempo()
 
@@ -29,7 +29,7 @@ object complejidadMedia inherits Complejidad {
 
 object complejidadMaxima inherits Complejidad {
 
-	override method costoExtra(tiempo, costoBase) = costoBase * 0.07 + self.costoAdicionalPorRetraso(tiempo)
+	override method costoExtra(tiempo) = self.costoBase(tiempo) * 0.07 + self.costoAdicionalPorRetraso(tiempo)
 
 	method costoAdicionalPorRetraso(tiempo) = 10 * 0.max(tiempo - 10)
 

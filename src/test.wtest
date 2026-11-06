@@ -71,3 +71,38 @@ describe "test del manejo de proyectos" {
 
 }
 
+
+describe "costo según complejidad a partir del tiempo" {
+
+	const tareaCorta = new TareaSimple(tiempo = 4)
+	const tareaLarga = new TareaSimple(tiempo = 12)
+
+	test "el costo base es el mismo para cualquier complejidad" {
+		assert.equals(100, complejidadMinima.costoBase(4))
+		assert.equals(100, complejidadMedia.costoBase(4))
+		assert.equals(100, complejidadMaxima.costoBase(4))
+	}
+
+	test "costo de una tarea de complejidad mínima" {
+		assert.equals(0, complejidadMinima.costoExtra(4))
+		assert.equals(100, complejidadMinima.costo(tareaCorta))
+	}
+
+	test "costo de una tarea de complejidad media" {
+		assert.equals(5, complejidadMedia.costoExtra(4))
+		assert.equals(105, complejidadMedia.costo(tareaCorta))
+	}
+
+	test "costo de una tarea de complejidad máxima sin retraso" {
+		assert.equals(7, complejidadMaxima.costoExtra(4))
+		assert.equals(107, complejidadMaxima.costo(tareaCorta))
+	}
+
+	test "costo de una tarea de complejidad máxima con retraso" {
+		assert.equals(0, complejidadMaxima.costoAdicionalPorRetraso(4))
+		assert.equals(20, complejidadMaxima.costoAdicionalPorRetraso(12))
+		assert.equals(41, complejidadMaxima.costoExtra(12))
+		assert.equals(341, complejidadMaxima.costo(tareaLarga))
+	}
+
+}

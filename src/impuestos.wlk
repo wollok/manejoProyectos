@@ -8,6 +8,7 @@ class Impuesto {
 
 	method calcularValor(costo) = costo * porcentaje / 100
 
+
 }
 
 const impuestoA = new Impuesto(porcentaje = 3)
