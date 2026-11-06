@@ -2,10 +2,8 @@ class Complejidad {
 
 	method costoBase(tiempo) = tiempo * 25
 
-	method costo(tarea) {
-		const costoBase = self.costoBase(tarea.tiempo())
-		return costoBase + self.costoExtra(tarea.tiempo())
-	}
+	method costo(tarea) = self.costoBase(tarea.tiempo()) + self.costoExtra(tarea.tiempo())
+	
 
 	method costoExtra(tiempo)
 
